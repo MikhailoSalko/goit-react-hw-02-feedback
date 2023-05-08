@@ -20,18 +20,13 @@ class App extends Component {
   countPositiveFeedbackPercentage = total => {
     const { good } = this.state;
     const positivePersantage = Math.round((good / total) * 100);
-    return Number(positivePersantage);
+    return positivePersantage;
   };
 
   countFeedback = e => {
-    this.setState(({ good, neutral, bad }) => {
-      if (e.target.innerHTML.toLowerCase() === 'good') {
-        return { good: good + 1 };
-      }
-      if (e.target.innerHTML.toLowerCase() === 'bad') {
-        return { bad: bad + 1 };
-      }
-      return { neutral: neutral + 1 };
+    const name = e.target.name;
+    this.setState(prevState => {
+      return { [name]: prevState[name] + 1 };
     });
   };
 
